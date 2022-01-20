@@ -3,14 +3,13 @@ import mongoose from 'mongoose'
 
 const RoomSchema = new mongoose.Schema({
 
-    propertyId:{
+    propertyID:{
         type:String,
-        required:[true, "Each Room should belng to a property"]
+        required:[true, "Each Room should belong to a property"]
     },
-
+    roomName:String,
     shared:Boolean,
-    numberOfUnits:Number,
-    currentStatus:String,
+    currentStatus:String, // occipied or not
     
     currentOwnerId:String, // Only if its not shared
     numberOfUnits:{
@@ -19,6 +18,11 @@ const RoomSchema = new mongoose.Schema({
     },
  
 },{timestamps:true});
+
+
+
+
+
 
 const Room = mongoose.model("Room",RoomSchema)
 
