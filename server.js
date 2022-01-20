@@ -9,7 +9,8 @@ const app = express()
 
 import auth_routes from "./routes/auth.js"
 import propertyRoutes from './routes/property.js'
-import roomsRoutes from "./routes/rooms.js"
+import roomsRoutes from "./routes/rooms.js";
+import unitRoutes from "./routes/unit.js"
 
 //connect to database
 dbConnect()
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended:true}));
 app.use('/auth',auth_routes)
 app.use('/property',propertyRoutes)
 app.use('/room',roomsRoutes)
+app.use('/unit',unitRoutes)
 
 
 app.get('/',(req,res) =>{
