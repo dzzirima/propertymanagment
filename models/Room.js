@@ -11,7 +11,7 @@ const RoomSchema = new mongoose.Schema({
     shared:Boolean,
     currentStatus:String, // occipied or not
     
-    currentOwnerId:String, // Only if its not shared
+    currentOwnerID:String, // Only if its not shared
     numberOfUnits:{
         type:Number,
         default:1
