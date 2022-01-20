@@ -12,6 +12,8 @@ import propertyRoutes from './routes/property.js'
 import roomsRoutes from "./routes/rooms.js";
 import unitRoutes from "./routes/unit.js"
 import leaseRoutes from "./routes/lease.js"
+import paymentRoutes from "./routes/payment.js"
+import expenseRoutes from "./routes/expense.js"
 
 //connect to database
 dbConnect()
@@ -26,6 +28,8 @@ app.use('/property',propertyRoutes)
 app.use('/room',roomsRoutes)
 app.use('/unit',unitRoutes)
 app.use('/lease',leaseRoutes)
+app.use('/payment',paymentRoutes)
+app.use('/expense',expenseRoutes)
 
 
 app.get('/',(req,res) =>{

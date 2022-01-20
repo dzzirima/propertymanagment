@@ -10,3 +10,20 @@ export const RoomStatus ={
     BOOKED:"BOOKED",
     EMPTY:"EMPTY"
 }
+
+export const PAYMENT_FORM = {
+    USD:"USD",
+    RTGS:"RTGS"
+}
+
+export const PAYMENT_TYPE= {
+    DEPOSIT:"DEPOSIT",
+    RENTALS:"RENTAL"
+}
+
+/**EXPENCES */
+export const EXPENCE_TYPE = {
+    SECURITY:"SECURITY",
+    GENERAL:"GENERAL"
+}
+
