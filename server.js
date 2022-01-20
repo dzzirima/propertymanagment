@@ -8,6 +8,7 @@ const PORT = process.env.PORT
 const app = express()
 
 import auth_routes from "./routes/auth.js"
+import propertyRoutes from './routes/property.js'
 
 //connect to database
 dbConnect()
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended:true}));
 
 //all the middles now
 app.use('/auth',auth_routes)
+app.use('/property',propertyRoutes)
 
 
 app.get('/',(req,res) =>{
