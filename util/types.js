@@ -27,3 +27,11 @@ export const EXPENCE_TYPE = {
     GENERAL:"GENERAL"
 }
 
+/**lease status */
+export const LEASE_STATUS={
+    PAID:"PAID",
+    OUTSTANDING:"OUTSTANDING",
+    PARTIALLY_PAID:"PARTIALLY_PAID",
+    CREATED:"CREATED"
+}
+

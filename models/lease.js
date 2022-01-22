@@ -1,4 +1,5 @@
 import  mongoose from "mongoose";
+import { LEASE_STATUS } from "../util/types";
 
 const LeaseSchema = new mongoose.Schema(
   {
@@ -20,10 +21,16 @@ const LeaseSchema = new mongoose.Schema(
     balance:{
       type:Number,
       required:[true,"Specifie the amount to be paid by tenants"]
+    },
+    paymentStatus:{
+      type:String,
+      default:LEASE_STATUS.CREATED
     }
   },
   { timestamps: true }
 );
+
+
 
 const Lease = mongoose.model("Lease", LeaseSchema);
 
