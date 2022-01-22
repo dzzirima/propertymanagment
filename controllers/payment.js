@@ -71,6 +71,13 @@ export const createPayment = async (req, res) => {
       receiptURL,
       reference,
     });
+
+    /**Now go ahead and reduce the lease balance  */
+   
+    let newLeaseBalance = foundLease.balance - Number(paidAmount).toFixed(2);
+    foundLease.balance = newLeaseBalance.toFixed(2);
+    await foundLease.save();
+
     res
       .json({
         success: "true",

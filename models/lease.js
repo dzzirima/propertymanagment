@@ -17,6 +17,10 @@ const LeaseSchema = new mongoose.Schema(
         required:[true,"Lease must must have expiry Date"]
     },
     active: Boolean,
+    balance:{
+      type:Number,
+      required:[true,"Specifie the amount to be paid by tenants"]
+    }
   },
   { timestamps: true }
 );

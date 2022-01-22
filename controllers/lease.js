@@ -10,6 +10,7 @@ export const createLease = async (req, res) => {
     description,
     numberOfTerms,
     type,
+    balance,
     expiryDate,
     active,
   } = req.body;
@@ -115,6 +116,7 @@ export const createLease = async (req, res) => {
       roomNumber,
       bedNumber,
       type,
+      balance,
       description,
       numberOfTerms,
       expiryDate,
