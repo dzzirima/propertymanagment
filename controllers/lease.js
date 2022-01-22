@@ -1,22 +1,22 @@
 import Lease from "../models/Lease.js";
+import Room from "../models/Room.js";
 import User from "../models/User.js";
 
 export const createLease = async (req, res) => {
   const {
     currentOwnerID,
     roomNumber,
+    bedNumber,
     description,
     numberOfTerms,
     type,
     expiryDate,
-    
     active,
   } = req.body;
 
   //**TODO a way to check if the Lease  exists */
 
   try {
-
     /**1.check if the user exists in our database */
     /**A room must have a maximum number of beds */
     let foundUser = await User.findById(currentOwnerID);
@@ -29,26 +29,91 @@ export const createLease = async (req, res) => {
     }
 
     /**2.check if the room requested has not yet occupied */
-    let foundCurrentOccupant = await Lease.findOne({roomNumber :roomNumber , bedNumber:bedNumber})
+    //{ $or:[ {'_id':objId}, {'name':param}, {'nickname':param} ]}
 
-    if(foundCurrentOccupant){
-      return res.status(409).json({
-        success:false,
-        message:"That room is already occupied"
-      })
+    let foundCurrentRoomOccupant = await Lease.find({
+      $or: [{ currentOwnerID: currentOwnerID }],
+    });
+
+  
+    if (foundCurrentRoomOccupant) {
+      /**check if a room is a shared
+       * if so check if the Bed is not yet occupied
+       * This check only applies when the room is shared
+       */
+      if (bedNumber) {
+        let roomRequested = await Room.findOne({ roomNumber: roomNumber });
+
+        if (!roomRequested) {
+          return res.status(401).json({
+            success: false,
+            message:
+              "Room requested  Not found try create room before asigning to user",
+          });
+        } else {
+          // find the room combination ie roomNumber and bed Number
+          let maximumNumberOfUnitsInRoom = roomRequested.numberOfUnits;
+        
+          let currentBedOccupant = await Lease.findOne({
+            bedNumber: bedNumber,
+          });
+
+          if (currentBedOccupant) {
+            return res.status(409).json({
+              success: false,
+              message: "Bed Number already Occupied By Someone ",
+              data:{
+                lease:currentBedOccupant
+              }
+            });
+          }
+        
+          //**try assigning the bed to someone */
+          if (roomRequested.shared) {
+
+            
+            if (Number(bedNumber) >maximumNumberOfUnitsInRoom) {
+
+              return res.status(403).json({
+                success: false,
+                message: "Bed Number  above maximum capacity of the room",
+                data: {
+                  room:roomRequested,
+                  bedNumberRequested:bedNumber,
+                  maximumRoomBeds:roomRequested.numberOfUnits
+                },
+              });
+            }
+          }else{
+            return res.status(401).json({
+              success: false,
+              message: "Room is not sharable",
+              data: {
+                error:'Not Sharable',
+                room:roomRequested,
+                bedNumberRequested:bedNumber,
+                maximumRoomBeds:roomRequested.numberOfUnits
+              },
+            });
+
+          }
+        }
+      }else{
+        return res.status(409).json({
+          success: false,
+          message: "That room is already occupied",
+          data: {
+            lease: foundCurrentRoomOccupant,
+          },
+        });
+      }
+      
     }
-    /**check if a room is a shared
-     * if so check if the Bed is not yet occupied
-     */
-
-
-
-
-
 
     const newLease = await Lease.create({
       currentOwnerID,
       roomNumber,
+      bedNumber,
       type,
       description,
       numberOfTerms,

@@ -64,7 +64,7 @@ export const updateRoom = async (req, res) => {
           numberOfUnits,
           currentStatus,
           currentOwnerID,
-          numberOfUnits,
+        
         },
       }
     );
@@ -159,27 +159,28 @@ export const generateRooms = async (req, res) => {
   try {
     let { numberOfRooms, _id } = propertyFound;
 
-    for (let i = 0; i <= numberOfRooms; i++) {
+    for (let i = 1; i <= numberOfRooms; i++) {
       /**create a general rooms using these indexes */
-      let newRoom = await Room.create({
-        propertyID: _id,
-        roomName: `Room${i + 1}`,
-        shared: false,
-      });
+      let newRoom = await Room.updateOne(
+        { propertyID: _id,roomNumber:i },
+        { $set: {
+          roomName: `Room${i + 1}`
+        } },
+        { upsert: true }
+      );
     }
-  res.status(201).json({
-    success:true,
-    message:"Auto generation Of Rooms went Succesfull",
-    data:{
-      range: `1 to ${numberOfRooms}`
-    }
-
-  })
+    res.status(201).json({
+      success: true,
+      message: "Auto generation Of Rooms went Succesfull",
+      data: {
+        range: `1 to ${numberOfRooms}`,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.json({
-      success:false,
-      message:error.message
-    })
+      success: false,
+      message: error.message,
+    });
   }
 };

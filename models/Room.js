@@ -13,6 +13,10 @@ const RoomSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    roomNumber:{
+        type:Number,
+        unique:[true,"All rooms should have a unique Number"]
+    },
     currentStatus:{
         type:String,
         default:RoomStatus.EMPTY,
