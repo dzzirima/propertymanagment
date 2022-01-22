@@ -1,27 +1,59 @@
 import Lease from "../models/Lease.js";
+import User from "../models/User.js";
 
 export const createLease = async (req, res) => {
   const {
     currentOwnerID,
+    roomNumber,
     description,
     numberOfTerms,
     type,
     expiryDate,
-    active
-
+    
+    active,
   } = req.body;
 
   //**TODO a way to check if the Lease  exists */
 
-
   try {
+
+    /**1.check if the user exists in our database */
+    /**A room must have a maximum number of beds */
+    let foundUser = await User.findById(currentOwnerID);
+
+    if (!foundUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User with ID not found",
+      });
+    }
+
+    /**2.check if the room requested has not yet occupied */
+    let foundCurrentOccupant = await Lease.findOne({roomNumber :roomNumber , bedNumber:bedNumber})
+
+    if(foundCurrentOccupant){
+      return res.status(409).json({
+        success:false,
+        message:"That room is already occupied"
+      })
+    }
+    /**check if a room is a shared
+     * if so check if the Bed is not yet occupied
+     */
+
+
+
+
+
+
     const newLease = await Lease.create({
       currentOwnerID,
+      roomNumber,
       type,
       description,
       numberOfTerms,
       expiryDate,
-      active
+      active,
     });
     res
       .json({
@@ -52,11 +84,8 @@ export const updateLease = async (req, res) => {
     description,
     numberOfTerms,
     expiryDate,
-    active
-    
+    active,
   } = req.body;
-
-
 
   try {
     await Lease.findByIdAndUpdate(
@@ -68,8 +97,7 @@ export const updateLease = async (req, res) => {
           description,
           numberOfTerms,
           expiryDate,
-          active
-          
+          active,
         },
       }
     );
@@ -135,12 +163,12 @@ export const getLease = async (req, res) => {
 
 export const getAllLeases = async (req, res) => {
   try {
-    let foundLeases= await Lease.find({});
+    let foundLeases = await Lease.find({});
     return res.json({
       success: true,
       message: "Properties found",
       data: {
-        Leases: foundLeases
+        Leases: foundLeases,
       },
     });
   } catch (error) {
@@ -150,4 +178,3 @@ export const getAllLeases = async (req, res) => {
     });
   }
 };
-

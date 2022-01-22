@@ -6,6 +6,8 @@ const LeaseSchema = new mongoose.Schema(
       type:String,
       required:[true,"All lease should be given to a person on its creation"]
     },
+    roomNumber:Number,
+    bedNumber:Number,
     type: String,
     description: String,
     numberOfTerms: Number,

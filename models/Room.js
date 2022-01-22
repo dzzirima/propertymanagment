@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { RoomStatus } from '../util/types.js';
 
 
 const RoomSchema = new mongoose.Schema({
@@ -8,10 +9,19 @@ const RoomSchema = new mongoose.Schema({
         required:[true, "Each Room should belong to a property"]
     },
     roomName:String,
-    shared:Boolean,
-    currentStatus:String, // occipied or not
+    shared:{
+        type:Boolean,
+        default:false,
+    },
+    currentStatus:{
+        type:String,
+        default:RoomStatus.EMPTY,
+    } ,// occipied or not
     
-    currentOwnerID:String, // Only if its not shared
+    currentOwnerID:{
+        type:String,
+        default:""
+    }, // Only if its not shared
     numberOfUnits:{
         type:Number,
         default:1

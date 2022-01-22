@@ -1,3 +1,4 @@
+import Property from "../models/Property.js";
 import Room from "../models/Room.js";
 
 export const createRoom = async (req, res) => {
@@ -11,7 +12,6 @@ export const createRoom = async (req, res) => {
   } = req.body;
 
   //**TODO a way to check if the Room  exists */
-
 
   try {
     const newRoom = await Room.create({
@@ -52,23 +52,19 @@ export const updateRoom = async (req, res) => {
     numberOfUnits,
     currentStatus,
     currentOwnerID,
-    
   } = req.body;
-
-
 
   try {
     await Room.findByIdAndUpdate(
       { _id },
       {
         $set: {
-            shared,
-            roomName,
-            numberOfUnits,
-            currentStatus,
-            currentOwnerID,
-            numberOfUnits,
-          
+          shared,
+          roomName,
+          numberOfUnits,
+          currentStatus,
+          currentOwnerID,
+          numberOfUnits,
         },
       }
     );
@@ -134,12 +130,12 @@ export const getRoom = async (req, res) => {
 
 export const getAllRooms = async (req, res) => {
   try {
-    let foundRooms= await Room.find({});
+    let foundRooms = await Room.find({});
     return res.json({
       success: true,
       message: "Properties found",
       data: {
-        Rooms: foundRooms
+        Rooms: foundRooms,
       },
     });
   } catch (error) {
@@ -150,3 +146,40 @@ export const getAllRooms = async (req, res) => {
   }
 };
 
+export const generateRooms = async (req, res) => {
+  const { propertyID } = req.body;
+  let propertyFound = await Property.findById(propertyID);
+
+  if (!propertyFound) {
+    return res.status(404).json({
+      success: false,
+      message: "property specified not found",
+    });
+  }
+  try {
+    let { numberOfRooms, _id } = propertyFound;
+
+    for (let i = 0; i <= numberOfRooms; i++) {
+      /**create a general rooms using these indexes */
+      let newRoom = await Room.create({
+        propertyID: _id,
+        roomName: `Room${i + 1}`,
+        shared: false,
+      });
+    }
+  res.status(201).json({
+    success:true,
+    message:"Auto generation Of Rooms went Succesfull",
+    data:{
+      range: `1 to ${numberOfRooms}`
+    }
+
+  })
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success:false,
+      message:error.message
+    })
+  }
+};
