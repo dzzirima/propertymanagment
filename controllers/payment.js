@@ -1,5 +1,7 @@
+import Lease from "../models/Lease.js";
 import Payment from "../models/Payments.js";
-
+import Property from "../models/Property.js";
+import User from "../models/User.js";
 
 export const createPayment = async (req, res) => {
   const {
@@ -10,31 +12,64 @@ export const createPayment = async (req, res) => {
     paidAmount,
     datePaid,
 
-    coverage,
-    coverageTimeline,
+    reference,
     type,
     description,
-    receiptURL
-    
+    receiptURL,
   } = req.body;
-
-  //**TODO a way to check if the Payment  exists */
-
-
   try {
+    //**TODO a way to check if the Payment  exists */
+    let foundPayment = await Payment.findOne({ reference: reference });
+
+    if (foundPayment) {
+      return res.status(302).json({
+        success: false,
+        message: "One payment with that reference/receipt Number already exits",
+      });
+    }
+
+    /**checking if the one who is paying is in the system */
+    let foundPayee = await User.findById(payeeID);
+    if (!foundPayee) {
+      return res.status(302).json({
+        success: true,
+        message: "Id of specified payeee not found please provide correct ID",
+        dataReceived: {
+          payeeID: payeeID,
+        },
+      });
+    }
+
+    /**Accept money only if someone has a lease which is not yet paid
+     *
+     *or if they have been assigned a renting unit
+     */
+    let foundLease = await Lease.findById(leaseID);
+    if (!foundLease) {
+      return res.status(302).json({
+        success: false,
+        message:
+          "One is allowed to pay once they have been given a lease or if they are owning",
+      });
+    }
+    /** TO property Id  Is needed if we doing multiple
+     * TODO do proper checking if the building exists
+     * In this case it will throw an error hence failing
+     */
+    let foundProperty = await Property.findById(propertyID);
+
     const newPayment = await Payment.create({
       payeeID,
-    propertyID,
-    leaseID,
+      propertyID,
+      leaseID,
 
-    paidAmount,
-    datePaid,
+      paidAmount,
+      datePaid,
 
-    coverage,
-    coverageTimeline,
-    type,
-    description,
-    receiptURL
+      type,
+      description,
+      receiptURL,
+      reference,
     });
     res
       .json({
@@ -71,11 +106,8 @@ export const updatePayment = async (req, res) => {
     coverageTimeline,
     type,
     description,
-    receiptURL
-    
+    receiptURL,
   } = req.body;
-
-
 
   try {
     await Payment.findByIdAndUpdate(
@@ -85,15 +117,15 @@ export const updatePayment = async (req, res) => {
           payeeID,
           propertyID,
           leaseID,
-      
+
           paidAmount,
           datePaid,
-      
+
           coverage,
           coverageTimeline,
           type,
           description,
-          receiptURL
+          receiptURL,
         },
       }
     );
@@ -159,12 +191,12 @@ export const getPayment = async (req, res) => {
 
 export const getAllPayments = async (req, res) => {
   try {
-    let foundPayments= await Payment.find({});
+    let foundPayments = await Payment.find({});
     return res.json({
       success: true,
       message: "Properties found",
       data: {
-        Payments: foundPayments
+        Payments: foundPayments,
       },
     });
   } catch (error) {
@@ -174,4 +206,3 @@ export const getAllPayments = async (req, res) => {
     });
   }
 };
-
