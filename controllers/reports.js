@@ -2,7 +2,10 @@
 import lodash from 'lodash'
 
 import Expense from "../models/Expenses.js";
+import Lease from '../models/Lease.js';
 import { returnTotal } from "../util/Calculation.js";
+import { PAYMENTSTATUS } from '../util/Roles.js';
+import { LEASE_STATUS } from '../util/types.js';
 
 export const expenseReport = async (req, res) => {
   try {
@@ -46,3 +49,28 @@ export const expenseReport = async (req, res) => {
     });
   }
 };
+
+
+export const outstandingPayments = async (req, res) =>{
+
+    try {
+        let allOutStandingLeases =  await Lease.find({paymentStatus:LEASE_STATUS.OUTSTANDING})
+        let outStandingTotal = returnTotal(allOutStandingLeases,"balance")
+
+        res.status(201).json({
+            success:true,
+            message:"report successfully generated",
+            data:{
+                summary:{
+                    totalOutstandingCount:allOutStandingLeases.length,
+                    totalAmount:outStandingTotal
+                },
+                outStandings:allOutStandingLeases
+                
+            }
+        })
+
+    } catch (error) {
+        
+    }
+}

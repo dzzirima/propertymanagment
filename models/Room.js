@@ -11,7 +11,7 @@ const RoomSchema = new mongoose.Schema({
     roomName:String,
     shared:{
         type:Boolean,
-        default:false,
+        default:true,
     },
     roomNumber:{
         type:Number,
