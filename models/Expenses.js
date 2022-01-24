@@ -11,7 +11,7 @@ const ExpenseSchema = new mongoose.Schema({
     datePaid:String,
     propertyPaid:String,
 
-    type:String,
+    type:String, // Currency Used
     coverage:Number, // 3
     coverageTimeline:String,// Months
 

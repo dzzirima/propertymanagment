@@ -14,6 +14,8 @@ import unitRoutes from "./routes/unit.js"
 import leaseRoutes from "./routes/lease.js"
 import paymentRoutes from "./routes/payment.js"
 import expenseRoutes from "./routes/expense.js"
+import reportRoutes from "./routes/reports.js"
+
 
 //connect to database
 dbConnect()
@@ -30,6 +32,7 @@ app.use('/unit',unitRoutes)
 app.use('/lease',leaseRoutes)
 app.use('/payment',paymentRoutes)
 app.use('/expense',expenseRoutes)
+app.use('/report',reportRoutes)
 
 
 app.get('/',(req,res) =>{
