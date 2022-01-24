@@ -1,5 +1,5 @@
 import  mongoose from "mongoose";
-import { LEASE_STATUS } from "../util/types";
+import { LEASE_STATUS } from "../util/types.js";
 
 const LeaseSchema = new mongoose.Schema(
   {
@@ -29,6 +29,30 @@ const LeaseSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+
+
+LeaseSchema.pre("save", async function(next){
+  //check if the balance changed
+  if(!this.isModified('balance')){
+    console.log("Balance was not mofied")
+    return next()
+  }
+  //change the status of the lease ie
+  let currentLeaseBalance = Number(this.balance)
+
+  //these conditions are based on  nust fees payment system
+  
+  if(currentLeaseBalance == 0){
+    this.paymentStatus = LEASE_STATUS.PAID;
+  }else if(currentLeaseBalance < 0){
+    this.paymentStatus =LEASE_STATUS.OVER_PAID
+  }else if(currentLeaseBalance > 0){
+    this.paymentStatus = LEASE_STATUS.OUTSTANDING
+  }
+  next()
+
+})
 
 
 

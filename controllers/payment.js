@@ -76,6 +76,12 @@ export const createPayment = async (req, res) => {
    
     let newLeaseBalance = foundLease.balance - Number(paidAmount).toFixed(2);
     foundLease.balance = newLeaseBalance.toFixed(2);
+
+    /**change the status of the lease Owing /Paid Or partiallyPaid 
+     * This has been impemented at schema level
+    */
+    
+    
     await foundLease.save();
 
     res
