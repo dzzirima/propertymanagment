@@ -11,7 +11,7 @@ const RoomSchema = new mongoose.Schema({
     roomName:String,
     shared:{
         type:Boolean,
-        default:true,
+        default:false,
     },
     roomNumber:{
         type:Number,
@@ -32,6 +32,10 @@ const RoomSchema = new mongoose.Schema({
     },
  
 },{timestamps:true});
+
+RoomSchema.methods.checkSharingStatus = async function (roomNumber){
+    return this.shared
+}
 
 const Room = mongoose.model("Room",RoomSchema)
 

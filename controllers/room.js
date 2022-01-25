@@ -164,7 +164,7 @@ export const generateRooms = async (req, res) => {
       let newRoom = await Room.updateOne(
         { propertyID: _id,roomNumber:i },
         { $set: {
-          roomName: `Room${i + 1}`
+          roomName: `Room${i}`
         } },
         { upsert: true }
       );
