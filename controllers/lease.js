@@ -1,6 +1,7 @@
 import Lease from "../models/Lease.js";
 import Room from "../models/Room.js";
 import User from "../models/User.js";
+import { RoomStatus } from "../util/types.js";
 
 export const createLease = async (req, res) => {
   const {
@@ -32,11 +33,10 @@ export const createLease = async (req, res) => {
     /**2.check if the room requested has not yet occupied */
     //{ $or:[ {'_id':objId}, {'name':param}, {'nickname':param} ]}
 
-
     let currentOccupant_room = await Lease.find({
       roomNumber: roomNumber,
     });
-
+    let roomRequested = await Room.findOne({ roomNumber: roomNumber });
 
     if (currentOccupant_room.length === 0) {
       /**Case 1 . The Room is not yet claimed*/
@@ -51,6 +51,10 @@ export const createLease = async (req, res) => {
         expiryDate,
         active,
       });
+      /**Update Current room status */
+      roomRequested.currentOwnerID = currentOwnerID,
+      roomRequested.currentStatus = RoomStatus.OCCUPIED;
+      await roomRequested.save();
       res
         .json({
           success: "true",
@@ -60,31 +64,33 @@ export const createLease = async (req, res) => {
           },
         })
         .status(200);
-
     } else {
       /**case 2 shared room
        * 2.1 check if the room is in shared state
        * 2.2 checkif the bed requested is >= maximumUnits
        * 2.3  check if that combination exi
        */
-      let roomRequested = await Room.find({roomNumber:roomNumber})
-      
-      let roomSharingStatus = roomRequested[0].shared
-      let maximumNumberOfUnitsInRoom = roomRequested[0].numberOfUnits
 
+      let roomSharingStatus = roomRequested.shared;
+      let maximumNumberOfUnitsInRoom = roomRequested.numberOfUnits;
 
-      if(roomSharingStatus && (Number(bedNumber) <= maximumNumberOfUnitsInRoom) ){
-        let combinationOccupant = await Lease.findOne({roomNumber:roomNumber , bedNumber:bedNumber})
+      if (
+        roomSharingStatus &&
+        Number(bedNumber) <= maximumNumberOfUnitsInRoom
+      ) {
+        let combinationOccupant = await Lease.findOne({
+          roomNumber: roomNumber,
+          bedNumber: bedNumber,
+        });
 
-        if(combinationOccupant){
+        if (combinationOccupant) {
           return res.status(403).json({
-            success:false,
-            message:"Something went wrong",
-            data:{
-              currentOccupant:combinationOccupant
-            }
-           
-          })
+            success: false,
+            message: "Something went wrong",
+            data: {
+              currentOccupant: combinationOccupant,
+            },
+          });
         }
 
         const newLease = await Lease.create({
@@ -98,6 +104,12 @@ export const createLease = async (req, res) => {
           expiryDate,
           active,
         });
+
+        /**Update Room Status */
+        (roomRequested.currentOwnerID = currentOwnerID),
+          (roomRequested.currentStatus = RoomStatus.OCCUPIED);
+        await roomRequested.save();
+
         res
           .json({
             success: true,
@@ -107,25 +119,23 @@ export const createLease = async (req, res) => {
             },
           })
           .status(200);
-        
-      }else{
-
-        if(bedNumber){
+      } else {
+        if (bedNumber) {
           return res.status(403).json({
-            success:false,
-            message:"Something went wrong",
-            possibleErrors:{
-              possible :"Room not in shared state ,bed Number requested above room carring capacity || room Already taken "
+            success: false,
+            message: "Something went wrong",
+            possibleErrors: {
+              possible:
+                "Room not in shared state ,bed Number requested above room carring capacity || room Already taken ",
             },
-          })
-        }else if(currentOccupant_room.length != 0){
-         return  res.status(403).json({
-            success:false,
-            message:"Found Current room Occupant",
-            currentRoomOCupant:currentOccupant_room
-          })
+          });
+        } else if (currentOccupant_room.length != 0) {
+          return res.status(403).json({
+            success: false,
+            message: "Found Current room Occupant",
+            currentRoomOCupant: currentOccupant_room,
+          });
         }
-
       }
     }
 
