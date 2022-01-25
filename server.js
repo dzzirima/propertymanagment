@@ -15,6 +15,7 @@ import leaseRoutes from "./routes/lease.js"
 import paymentRoutes from "./routes/payment.js"
 import expenseRoutes from "./routes/expense.js"
 import reportRoutes from "./routes/reports.js"
+import communicationRoutes from "./routes/communication.js"
 
 
 //connect to database
@@ -33,6 +34,7 @@ app.use('/lease',leaseRoutes)
 app.use('/payment',paymentRoutes)
 app.use('/expense',expenseRoutes)
 app.use('/report',reportRoutes)
+app.use('/communication',communicationRoutes)
 
 
 app.get('/',(req,res) =>{

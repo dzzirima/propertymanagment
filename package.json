@@ -30,6 +30,7 @@
     "mongoose": "^6.0.3",
     "ngrok": "^4.2.2",
     "paynow": "^1.0.9",
+    "twilio": "^3.73.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

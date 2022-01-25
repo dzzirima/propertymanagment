@@ -1,0 +1,1506 @@
+{
+	"info": {
+		"_postman_id": "a80bc713-cb8f-40d4-879f-fb495461f84e",
+		"name": "PropertyManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Hello_world",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\":\"David T Zirima\",\r\n    \"email\":\"Test Email\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"STUDENT\",\r\n    \"lastName\":\"STUDENT\",\r\n    \"profileImageURL\":\"profileURL\",\r\n\r\n    \"email\":\"student1@gmail.com\",\r\n    \"phone\":\"+26378539652\",\r\n\r\n    \"password\":\"mafia2\",\r\n    \"role\":\"STUDENT\",\r\n\r\n    \"identityProofUrl\":\"http:firebase\",\r\n    \"nextOfKin\":{\r\n        \"name\":\"Tafadzwa\",\r\n        \"surname\":\"zirima Next Of Kin\",\r\n\r\n        \"email\":\"tafghadzwazirima@ygmail.com\",\r\n        \"phoneNumber\":\"+26378539652\",\r\n        \"relationShip\":\"Brother\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"davidtzirima@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/forgotPassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordResetToken\":\"reset Token\",\r\n    \"newPassword\":\"NewPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/resetPassword",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"resetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n   \"email\":\"davidtzirima@gkmail.com\",\r\n    \"password\":\"mafia2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61d3ed2558c1ff22d34cbeea\",\r\n    \"firstName\": \"David T\",\r\n    \"email\": \"davidtz2irim0a@gmail.com\",\r\n    \"phone\": \"+000000000000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/getUser?_id=61d3f63786669efa6a8328c8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"getUser"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61d3f63786669efa6a8328c8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhdmlkdHoyaXJpbWFhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NDEyODM0Mjd9.nVKzz9yE3ZFX6ykmsdbaVnpz98NOipwnF_1L6gp8ED4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/delete?_id=61d3ed2558c1ff22d34cbeea",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61d3ed2558c1ff22d34cbeea"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/getAllUsers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"getAllUsers"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "property",
+			"item": [
+				{
+					"name": "addProperty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"type\":\"Flat\",\r\n   \"name\":\"Sondela Lodge\",\r\n   \"description\":\"Optional description here\",\r\n   \"numberOfRooms\":200,\r\n   \"phone\":\"263 677 8990\",\r\n   \"address\":\"Number 7  Gafa Road  , Bulawayo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/property/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"property",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProperty",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61e92999247a3411c99a6313\",\r\n    \r\n    \"phone\": \"+000000000000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/property/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"property",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProperty",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/property/getProperty?_id=61d3f63786669efa6a8328c8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"property",
+								"getProperty"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61d3f63786669efa6a8328c8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProperty",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/property/delete?_id=61e92999247a3411c99a6313",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"property",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e92999247a3411c99a6313"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProperties",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhdmlkdHppcmltYUBna21haWwuY29tIiwiaWF0IjoxNjQyODYzNzM0fQ.NYLOjK_kVjuqr8ycszjASkuceOfTa_7Q3BTqpxELVFM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/property/getAllProperties",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"property",
+								"getAllProperties"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rooms",
+			"item": [
+				{
+					"name": "AddRoom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyID\":\"propertyID\",\r\n  \"roomName\":\"Room Name\",\r\n  \"shared\":true,\r\n  \"numberOfUnits\":2,\r\n  \"currentStatus\":\"Empty\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generateRooms",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"propertyID\":\"61e92b77247a3411c99a631d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/generate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRooms",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61efc8121e6e2ebd58cc85b2\",\r\n    \"shared\":true,\r\n    \"numberOfUnits\":3\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRoom",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/getRoom?_id=61e940e57f760d9f5e7f7275",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"getRoom"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e940e57f760d9f5e7f7275"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRoom",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/delete?_id=61e92999247a3411c99a6313",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e92999247a3411c99a6313"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllRooms",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/getAllRooms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"getAllRooms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Unit",
+			"item": [
+				{
+					"name": "AddUnit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"propertyID\":\"propertyID\",\r\n  \"roomID\":\"roomID\",\r\n  \"currentOwnerID\":\"Gafa Student\",\r\n  \"unitName\":\"A\"\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/unit/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"unit",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUnit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61e9481139709adde7ffd01b\",\r\n    \"unitName\":\"Updated Name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/unit/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"unit",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRoom",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/unit/getUnit?_id=61e9481139709adde7ffd01b",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"unit",
+								"getUnit"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e9481139709adde7ffd01b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRoom",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/room/delete?_id=61e92999247a3411c99a6313",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"room",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e92999247a3411c99a6313"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllRooms",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/unit/getAllUnits",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"unit",
+								"getAllUnits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "lease",
+			"item": [
+				{
+					"name": "AddLease",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"currentOwnerID\":\"61ef1b2c4ed66b919a6a1cad\",\r\n  \"roomNumber\":14,\r\n  \"balance\":500,\r\n  \"type\":\"Short Term\",\r\n  \"description\":\"For Student / Single people\",\r\n  \"numberOfTerms\":3,\r\n  \"expiryDate\":\"25/09/22\",\r\n  \"active\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/lease/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"lease",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLease",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61e954c904c9e7c6b78e7dbc\",\r\n    \"expiryDate\":\"No expiryDate\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/lease/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"lease",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getlease",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/lease/getLease?_id=61e954c904c9e7c6b78e7dbc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"lease",
+								"getLease"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e954c904c9e7c6b78e7dbc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLease",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/lease/delete?_id=61e92999247a3411c99a6313",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"lease",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e92999247a3411c99a6313"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllLeases",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/lease/getAllLeases",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"lease",
+								"getAllLeases"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "addPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payeeID\":\"61e88a63e5f101b8032ecc5d\",\r\n    \"propertyID\":\"61e92b77247a3411c99a631d\",\r\n    \"leaseID\":\"61ec70aeb5308da784aab135\",\r\n    \"reference\":\"t78eryuuuuert2\",\r\n\r\n    \"paidAmount\":55,\r\n    \"type\":\"USD\",\r\n\r\n\r\n    \"description\":\"Student January payment\",\r\n    \"receiptURL\":\"receiptURL\"\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payment/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePayment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61e954c904c9e7c6b78e7dbc\",\r\n    \"expiryDate\":\"No expiryDate\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payment/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payment",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPayment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payment/getPayment?_id=61e954c904c9e7c6b78e7dbc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payment",
+								"getPayment"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e954c904c9e7c6b78e7dbc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePayment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payment/delete?_id=61e92999247a3411c99a6313",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payment",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e92999247a3411c99a6313"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAppPayments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payment/getAllPayments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payment",
+								"getAllPayments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exepense",
+			"item": [
+				{
+					"name": "addExpense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paidTo\":\"Zesa\",\r\n    \"paidAmount\":1800,\r\n    \"datePaid\":\"24/78/89\",\r\n    \"propertyPaid\":\"Complex1\",\r\n     \"type\":\"USD\",\r\n     \r\n    \"coverage\":5,\r\n    \"coverageTimeline\":\"Days\",\r\n\r\n    \"description\":\"Transformer renewal\",\r\n    \"receiptURL\":\"receiptURL\"\r\n\r\n\r\n\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expense/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expense",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateExpense",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"61e954c904c9e7c6b78e7dbc\",\r\n    \"expiryDate\":\"No expiryDate\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expense/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expense",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExpense",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expense/getExpense?_id=61e954c904c9e7c6b78e7dbc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expense",
+								"getExpense"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e954c904c9e7c6b78e7dbc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteExpense",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expense/delete?_id=61e92999247a3411c99a6313",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expense",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "61e92999247a3411c99a6313"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getallExpenses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/expense/getAllExpenses",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"expense",
+								"getAllExpenses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reports",
+			"item": [
+				{
+					"name": "getAllOutStanings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/report/outStandingReport",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"report",
+								"outStandingReport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllExpenses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/report/expenseReport",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"report",
+								"expenseReport"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "communication",
+			"item": [
+				{
+					"name": "getAllOutStanings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":\"+263785395827\",\r\n    \"message\":\"Hello  Gafa . This is a reminder that  your January rent for [Rental Property] of $500 is overdue . Please make a payment at your earliest convenience. Our contact no is 0185 7852 741\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/communication/sms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"communication",
+								"sms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllExpenses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{propertyAdmin}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/report/expenseReport",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"report",
+								"expenseReport"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
